@@ -15,46 +15,77 @@ public class Manager : MonoBehaviour {
 	private Slider DValue;
 
 	[SerializeField]
-	private float maxValue = 10;
+	private float addMaxValue = 10;
 
 	[SerializeField]
-	private float minValue = -10;
+	private float addMinValue = 0;
+
+    [SerializeField]
+    private float multiMaxValue = 3;
+
+    [SerializeField]
+    private float multiMinValue = 1;
+
+    private float aValue;
+    private float bValue;
+    private float cValue;
+    private float dValue;
 
 	public float getAValue(){
-		return AValue.value;
+		return aValue;
 	}
 
 	public float getBValue(){
-		return BValue.value;
+		return bValue;
 	}
 
 	public float getCValue(){
-		return CValue.value;
+		return cValue;
 	}
 
 	public float getDValue(){
-		return DValue.value;
+		return dValue;
 	}
 
 	void Start(){
 
 		if(instance == null){
-			AValue.maxValue = maxValue;
-			AValue.minValue = minValue;
+			AValue.maxValue = multiMaxValue;
+			AValue.minValue = multiMinValue;
 
-			BValue.maxValue = maxValue;
-			BValue.minValue = minValue;
+			BValue.maxValue = multiMaxValue;
+			BValue.minValue = multiMinValue;
 
-			CValue.maxValue = maxValue;
-			CValue.minValue = minValue;
+			CValue.maxValue = addMaxValue;
+			CValue.minValue = addMinValue;
 
-			CValue.maxValue = maxValue;
-			CValue.minValue = minValue;
-			instance = this;
+			DValue.maxValue = addMaxValue;
+			DValue.minValue = addMinValue;
+
+
+            aValue = AValue.value;
+            bValue = BValue.value;
+            cValue = CValue.value;
+            dValue = DValue.value;
+
+            AValue.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+            BValue.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+            CValue.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+            DValue.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+
+            instance = this;
 		}else{
 			Destroy(gameObject);
 		}
 		
 	}
+
+    public void ValueChangeCheck()
+    {
+        aValue = AValue.value;
+        bValue = BValue.value;
+        cValue = CValue.value;
+        dValue = DValue.value;
+    }
 
 }

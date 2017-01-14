@@ -53,7 +53,7 @@ public class Grapher1 : MonoBehaviour {
         if(currentVisualLength != visualLength)
         {
             currentVisualLength = visualLength;
-            //Camera.main.transform.position = new Vector3(visualLength / 2, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            Camera.main.transform.position = new Vector3(visualLength / 2, Camera.main.transform.position.y, Camera.main.transform.position.z);
             CreatePoints();
         }
 
@@ -71,7 +71,7 @@ public class Grapher1 : MonoBehaviour {
 
     private float sine(float x)
     {
-        return (Manager.instance.getAValue() * Mathf.Sin((Manager.instance.getBValue() * x) - Manager.instance.getCValue())) + Manager.instance.getDValue();
+        return (Manager.instance.getAValue() * Mathf.Sin((Manager.instance.getBValue() * x) + Manager.instance.getCValue())) + Manager.instance.getDValue();
     }
 
 }
